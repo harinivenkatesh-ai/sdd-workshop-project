@@ -37,10 +37,6 @@ The application analyzes software project ideas, detects technical capability ke
 
 This project was implemented using a Spec Driven Development workflow with OpenSpec.
 
-## Workflow Documentation
-
-[OpenSpec Execution Process PDF](./openspec-execution-process.pdf)
-
 ### Workflow Summary
 
 - Created OpenSpec proposal artifacts
@@ -54,3 +50,9 @@ This project was implemented using a Spec Driven Development workflow with OpenS
 - Verified functionality using build + test validation
 
 ---
+
+## Workflow Documentation
+
+[OpenSpec Execution Process PDF](./openspec-execution-process.pdf)
+
+
