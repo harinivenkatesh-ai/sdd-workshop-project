@@ -1,11 +1,22 @@
-export const KEYWORD_PATTERNS = [
-    { label: 'AI', pattern: /\bai\b/i },
-    { label: 'blockchain', pattern: /\bblockchain\b/i },
-    { label: 'realtime', pattern: /\brealtime\b/i },
-    { label: 'payments', pattern: /\bpayments?\b/i },
-    { label: 'chat', pattern: /\bchat\b/i },
-    { label: 'video streaming', pattern: /\bvideo streaming\b/i },
-]
+export const keywordGroups = {
+    ai: ['ai', 'artificial intelligence', 'machine learning', 'ml'],
+    blockchain: ['blockchain', 'block chain', 'crypto', 'web3'],
+    realtime: ['realtime', 'real-time', 'live', 'instant'],
+    payments: ['payment', 'payments', 'banking', 'transactions'],
+    chat: ['chat', 'chatbot', 'messaging', 'messages'],
+    'video streaming': ['video streaming', 'livestream', 'live stream', 'live video', 'streaming'],
+}
+
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function aliasMatches(normalizedInput, alias) {
+    const escapedAlias = escapeRegExp(alias)
+    const pattern = new RegExp(`\\b${escapedAlias.replace(/\\s+/g, '\\s+')}\\b`, 'i')
+
+    return pattern.test(normalizedInput)
+}
 
 export function normalizeText(input) {
     return input
@@ -16,11 +27,18 @@ export function normalizeText(input) {
 }
 
 export function detectKeywords(input) {
-    const normalizedInput = normalizeText(input)
+    const normalizedInput = input.toLowerCase()
+    const detectedKeywords = []
 
-    return KEYWORD_PATTERNS
-        .filter(({ pattern }) => pattern.test(normalizedInput))
-        .map(({ label }) => label)
+    Object.entries(keywordGroups).forEach(([mainKeyword, aliases]) => {
+        const found = aliases.some((alias) => aliasMatches(normalizedInput, alias))
+
+        if (found) {
+            detectedKeywords.push(mainKeyword)
+        }
+    })
+
+    return detectedKeywords
 }
 
 export function getComplexity(keywordCount) {

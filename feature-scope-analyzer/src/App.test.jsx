@@ -19,7 +19,7 @@ describe('Feature Scope Analyzer', () => {
         const keywordBlock = screen.getByText('Detected keywords').closest('.detail-block')
 
         expect(screen.getByText('High')).toBeInTheDocument()
-        expect(within(keywordBlock).getByText(/AI, blockchain, realtime, payments, chat, video streaming/i)).toBeInTheDocument()
+        expect(within(keywordBlock).getByText(/ai, blockchain, realtime, payments, chat, video streaming/i)).toBeInTheDocument()
         expect(screen.getByText(/staged MVP/i)).toBeInTheDocument()
     })
 
@@ -67,8 +67,18 @@ describe('Feature Scope Analyzer', () => {
         expect(detectKeywords('payments')).toEqual(['payments'])
     })
 
+    it('detects aliases for the expanded keyword groups', () => {
+        expect(detectKeywords('block chain app')).toEqual(['blockchain'])
+        expect(detectKeywords('livestream classes')).toEqual(['video streaming'])
+        expect(detectKeywords('chatbot ecommerce assistant')).toEqual(['chat'])
+        expect(detectKeywords('crypto donation tracker')).toEqual(['blockchain'])
+        expect(detectKeywords('live driver tracking')).toEqual(['realtime'])
+        expect(detectKeywords('banking platform')).toEqual(['payments'])
+        expect(detectKeywords('instant messaging app')).toEqual(['realtime', 'chat'])
+    })
+
     it('detects multi-word phrases as whole phrases', () => {
         expect(detectKeywords('video streaming')).toEqual(['video streaming'])
-        expect(detectKeywords('We need video streaming for live events')).toEqual(['video streaming'])
+        expect(detectKeywords('We need video streaming for live events')).toEqual(['realtime', 'video streaming'])
     })
 })
