@@ -1,6 +1,19 @@
-# Vibe Coded Implementation
+# Feature Scope Analyzer — Vibe Coded Version
 
-This version of the Feature Scope Analyzer was built using a vibe coding workflow with minimal upfront planning.
+A simple React + Vite application built during the Spec Driven Development workshop using a vibe coding workflow.
+The app analyzes software project ideas, detects implementation-related keywords, estimates complexity, and suggests simplified MVP recommendations.
+
+---
+
+## Example Inputs
+
+- AI blockchain realtime chat platform
+- livestream classroom application
+- crypto donation tracker
+- chatbot ecommerce assistant
+- decentralized voting system
+
+---
 
 ## Included Files
 
@@ -12,3 +25,4 @@ This version of the Feature Scope Analyzer was built using a vibe coding workflo
 ## Notes
 
 The implementation focused on rapid iteration and lightweight AI-assisted development rather than formal specification-driven execution.
+This branch highlights the tradeoff between rapid development speed and structured engineering rigor.
